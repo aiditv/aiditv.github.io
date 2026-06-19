@@ -1,0 +1,443 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow">
+<title>站点导航 · 发布页</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg:        #f5f5f7;
+    --bg-card:   #ffffff;
+    --bg-item:   #f9f9fb;
+    --border:    rgba(0,0,0,0.07);
+    --border-h:  rgba(180,140,0,0.35);
+    --gold:      #c9980a;
+    --gold-dim:  rgba(201,152,10,0.08);
+    --gold-light:rgba(201,152,10,0.12);
+    --text:      #1a1a1e;
+    --text-dim:  #aaaab8;
+    --text-mid:  #6b6b7e;
+    --ok:        #1a9e45;
+    --fail:      #d93025;
+    --ok-glow:   rgba(26,158,69,0.25);
+    --fail-glow: rgba(217,48,37,0.25);
+    --radius:    14px;
+    --radius-sm: 8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,0,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:60px 24px 48px;}
+header{text-align:center;margin-bottom:48px;animation:fadeUp .6s ease both;}
+.logo{font-family:'Outfit',sans-serif;font-weight:700;font-size:52px;letter-spacing:-1px;color:var(--gold);line-height:1;display:inline-block;}
+.logo::after{content:'';display:block;width:32px;height:3px;background:var(--gold);border-radius:2px;margin:10px auto 0;opacity:0.5;}
+.notice{margin-top:18px;font-size:13px;color:var(--text-dim);display:inline-flex;align-items:center;gap:8px;}
+.notice kbd{font-family:'JetBrains Mono',monospace;font-size:11px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-bottom-width:2px;color:var(--text-mid);padding:2px 7px;border-radius:5px;letter-spacing:0.5px;}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,0.05);animation:fadeUp .6s ease both;}
+.card:nth-child(2){animation-delay:.07s;}.card:nth-child(3){animation-delay:.14s;}.card:nth-child(4){animation-delay:.21s;}.card:nth-child(5){animation-delay:.28s;}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.section-title{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;}
+.section-title::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;flex-shrink:0;}
+.dns-banner{background:linear-gradient(135deg,#fffbef 0%,#fff8e1 100%);border:1.5px solid rgba(201,152,10,0.3);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;animation:fadeUp .6s ease both;animation-delay:.02s;}
+.dns-banner-top{display:flex;align-items:flex-start;gap:14px;}
+.dns-icon{width:40px;height:40px;border-radius:10px;background:var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dns-icon svg{width:20px;height:20px;fill:white;}
+.dns-title{font-size:15px;font-weight:700;color:#7a5500;line-height:1.3;}
+.dns-sub{font-size:13px;color:#a07020;margin-top:4px;line-height:1.5;}
+.dns-badge{display:inline-block;background:var(--gold);color:#fff;font-size:11px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:100px;margin-left:6px;vertical-align:middle;}
+.dns-servers{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+.dns-chip{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(201,152,10,0.25);border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+.dns-chip:hover{border-color:var(--gold);box-shadow:0 2px 8px rgba(201,152,10,0.15);}
+.dns-chip-name{font-weight:600;color:#7a5500;}
+.dns-chip-val{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-mid);}
+.dns-guide-toggle{margin-top:14px;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gold);cursor:pointer;user-select:none;width:fit-content;}
+.dns-guide-toggle svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s;}
+.dns-guide-toggle.open svg{transform:rotate(180deg);}
+.platform-panels{display:none;}
+.platform-panels.open{display:block;}
+.platform-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.ptab{font-size:12px;font-weight:600;color:var(--text-mid);background:var(--bg-item);border:1px solid var(--border);border-radius:100px;padding:5px 14px;cursor:pointer;transition:all .2s;}
+.ptab:hover{color:var(--gold);border-color:var(--border-h);}
+.ptab.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+.panel{display:none;}.panel.active{display:block;}
+.steps{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.step{display:flex;gap:12px;align-items:flex-start;}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(201,152,10,0.25);color:var(--gold);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-text{font-size:13px;line-height:1.6;color:var(--text-mid);}
+.step-text b{color:var(--text);font-weight:600;}
+code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.06);border-radius:4px;padding:1px 6px;color:#7a5500;}
+.step-note{font-size:12px;color:var(--text-dim);margin-top:4px;padding-left:34px;}
+.btn-check{font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--text-mid);background:var(--bg-item);border:1px solid var(--border);border-radius:100px;padding:5px 14px;cursor:pointer;transition:color .2s,border-color .2s,background .2s;white-space:nowrap;}
+.btn-check:hover:not(:disabled){color:var(--gold);border-color:var(--border-h);background:var(--gold-dim);}
+.btn-check:disabled{opacity:.45;cursor:not-allowed;}
+.url-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
+.url-item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg-item);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;text-decoration:none;transition:border-color .2s,background .2s,transform .15s,box-shadow .15s;}
+.url-item:hover{border-color:var(--border-h);background:#fff;transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.07);}
+.url-info{min-width:0;}
+.url-host{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--text);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.url-label{font-size:11px;color:var(--text-dim);margin-top:3px;display:block;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.1);flex-shrink:0;transition:background .35s,box-shadow .35s;}
+.dot.ok{background:var(--ok);box-shadow:0 0 8px var(--ok-glow);}
+.dot.fail{background:var(--fail);box-shadow:0 0 8px var(--fail-glow);}
+.dot.checking{background:var(--gold);animation:pulse 1s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+.info-list{display:flex;flex-direction:column;}
+.info-row{display:flex;flex-direction:column;gap:6px;padding:16px 0;border-bottom:1px solid var(--border);}
+.info-row:first-child{padding-top:0;}.info-row:last-child{border:none;padding-bottom:0;}
+.info-label{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);}
+.info-text{font-size:14px;line-height:1.65;color:var(--text-mid);}
+.info-text.alert{color:var(--fail);font-weight:500;}
+a.link{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(201,152,10,0.25);transition:border-color .2s;}
+a.link:hover{border-color:var(--gold);}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.tags a{font-size:12px;color:var(--text-mid);background:var(--bg-item);border:1px solid var(--border);border-radius:6px;padding:4px 10px;text-decoration:none;transition:color .2s,border-color .2s,background .2s;}
+.tags a:hover{color:var(--gold);border-color:var(--border-h);background:var(--gold-dim);}
+/* 加载占位 */
+.url-skeleton{height:56px;background:var(--bg-item);border:1px solid var(--border);border-radius:var(--radius-sm);animation:shimmer 1.2s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{opacity:.5;}50%{opacity:1;}}
+/* GitHub 永久条目 */
+.github-item{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#fffbef 0%,#fff8e1 100%);border:1.5px solid rgba(201,152,10,0.4);border-radius:var(--radius-sm);padding:16px;grid-column:1/-1;transition:box-shadow .2s,transform .15s;}
+.github-item:hover{box-shadow:0 4px 20px rgba(201,152,10,0.18);transform:translateY(-1px);}
+.gh-badge{display:inline-flex;align-items:center;background:var(--gold);color:#fff;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 9px;border-radius:100px;}
+.btn-bookmark{font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;background:var(--gold);color:#fff;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;transition:background .2s,transform .1s;white-space:nowrap;}
+.btn-bookmark:hover{background:#e0ac10;transform:scale(1.04);}
+.btn-visit{font-family:'Outfit',sans-serif;font-size:12px;font-weight:500;color:var(--gold);background:transparent;border:1px solid rgba(201,152,10,0.4);border-radius:8px;padding:6px 14px;text-decoration:none;white-space:nowrap;transition:background .2s,border-color .2s;}
+.btn-visit:hover{background:var(--gold-dim);border-color:var(--gold);}
+footer{text-align:center;padding:32px 0 0;font-size:12px;color:var(--text-dim);letter-spacing:.03em;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:600px){.wrap{padding:40px 16px;}.logo{font-size:42px;}.url-grid{grid-template-columns:1fr;}.dns-servers{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+    <div class="logo" id="siteLogo"></div>
+    <div class="notice">按 <kbd>Ctrl + D</kbd> 收藏本页 · 防止失联</div>
+</header>
+
+<div class="dns-banner">
+    <div class="dns-banner-top">
+        <div class="dns-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+        </div>
+        <div>
+            <div class="dns-title">
+                无法访问？修改 DNS 即可解决
+                <span class="dns-badge">解决 100% 访问问题</span>
+            </div>
+            <div class="dns-sub">大多数访问失败是由 DNS 污染导致的，换用公共 DNS 可立即修复，无需任何工具。推荐使用以下服务器：</div>
+        </div>
+    </div>
+    <div class="dns-servers">
+        <div class="dns-chip" onclick="copyDns('8.8.8.8',this)">
+            <span class="dns-chip-name">Google DNS</span>
+            <code class="dns-chip-val">8.8.8.8</code>
+            <span class="copy-hint" style="font-size:11px;color:var(--text-dim);">点击复制</span>
+        </div>
+        <div class="dns-chip" onclick="copyDns('8.8.4.4',this)">
+            <span class="dns-chip-name">Google 备用</span>
+            <code class="dns-chip-val">8.8.4.4</code>
+            <span class="copy-hint" style="font-size:11px;color:var(--text-dim);">点击复制</span>
+        </div>
+        <div class="dns-chip" onclick="copyDns('1.1.1.1',this)">
+            <span class="dns-chip-name">Cloudflare DNS</span>
+            <code class="dns-chip-val">1.1.1.1</code>
+            <span class="copy-hint" style="font-size:11px;color:var(--text-dim);">点击复制</span>
+        </div>
+    </div>
+    <div class="dns-guide-toggle" id="guideToggle" onclick="toggleGuide()">
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        查看各设备修改教程
+    </div>
+    <div class="platform-panels" id="platformPanels">
+        <div class="platform-tabs">
+            <div class="ptab active" onclick="switchTab('win',this)">Windows</div>
+            <div class="ptab" onclick="switchTab('mac',this)">macOS</div>
+            <div class="ptab" onclick="switchTab('ios',this)">iPhone / iPad</div>
+            <div class="ptab" onclick="switchTab('android',this)">Android</div>
+            <div class="ptab" onclick="switchTab('router',this)">路由器</div>
+        </div>
+        <div class="panel active" id="panel-win">
+            <ol class="steps">
+                <li class="step"><div class="step-num">1</div><div class="step-text">右下角网络图标 → 右键 → <b>打开网络和 Internet 设置</b></div></li>
+                <li class="step"><div class="step-num">2</div><div class="step-text">点击 <b>更改适配器选项</b>，找到当前网络，右键 → <b>属性</b></div></li>
+                <li class="step"><div class="step-num">3</div><div class="step-text">双击 <b>Internet 协议版本 4 (TCP/IPv4)</b></div></li>
+                <li class="step"><div class="step-num">4</div><div class="step-text">选择 <b>使用下面的 DNS 服务器地址</b>，首选 <code>8.8.8.8</code>，备用 <code>8.8.4.4</code></div></li>
+                <li class="step"><div class="step-num">5</div><div class="step-text">点击 <b>确定</b> 保存，刷新页面即可</div></li>
+            </ol>
+        </div>
+        <div class="panel" id="panel-mac">
+            <ol class="steps">
+                <li class="step"><div class="step-num">1</div><div class="step-text">苹果菜单 → <b>系统设置</b> → <b>网络</b></div></li>
+                <li class="step"><div class="step-num">2</div><div class="step-text">选中当前连接 → <b>高级</b> → <b>DNS</b> 标签页</div></li>
+                <li class="step"><div class="step-num">3</div><div class="step-text">点 <b>+</b> 依次添加 <code>8.8.8.8</code> 和 <code>1.1.1.1</code></div></li>
+                <li class="step"><div class="step-num">4</div><div class="step-text">点击 <b>好</b> → <b>应用</b> 即可</div></li>
+            </ol>
+        </div>
+        <div class="panel" id="panel-ios">
+            <ol class="steps">
+                <li class="step"><div class="step-num">1</div><div class="step-text"><b>设置</b> → <b>Wi-Fi</b> → 当前网络右侧 <b>ⓘ</b></div></li>
+                <li class="step"><div class="step-num">2</div><div class="step-text">下滑 <b>配置 DNS</b> → 改为 <b>手动</b></div></li>
+                <li class="step"><div class="step-num">3</div><div class="step-text">删除原有 DNS，添加 <code>8.8.8.8</code> 和 <code>1.1.1.1</code></div></li>
+                <li class="step"><div class="step-num">4</div><div class="step-text">右上角 <b>存储</b> 即可</div></li>
+            </ol>
+            <p class="step-note">💡 仅对当前 Wi-Fi 生效，建议在路由器统一修改。</p>
+        </div>
+        <div class="panel" id="panel-android">
+            <ol class="steps">
+                <li class="step"><div class="step-num">1</div><div class="step-text"><b>设置</b> → <b>网络与互联网</b> → 长按当前 Wi-Fi → <b>修改网络</b></div></li>
+                <li class="step"><div class="step-num">2</div><div class="step-text">展开 <b>高级选项</b>，IP 设置改为 <b>静态</b></div></li>
+                <li class="step"><div class="step-num">3</div><div class="step-text"><b>DNS 1</b> 填 <code>8.8.8.8</code>，<b>DNS 2</b> 填 <code>1.1.1.1</code></div></li>
+                <li class="step"><div class="step-num">4</div><div class="step-text">点击 <b>保存</b>，重连 Wi-Fi</div></li>
+            </ol>
+            <p class="step-note">💡 也可搜索"私人 DNS"，填入 <code>dns.google</code>，对所有网络生效。</p>
+        </div>
+        <div class="panel" id="panel-router">
+            <ol class="steps">
+                <li class="step"><div class="step-num">1</div><div class="step-text">浏览器访问 <code>192.168.1.1</code> 或 <code>192.168.0.1</code> 登录路由器后台</div></li>
+                <li class="step"><div class="step-num">2</div><div class="step-text">找到 <b>WAN 设置</b> → <b>DNS 设置</b></div></li>
+                <li class="step"><div class="step-num">3</div><div class="step-text">首选 DNS 填 <code>8.8.8.8</code>，备用填 <code>1.1.1.1</code></div></li>
+                <li class="step"><div class="step-num">4</div><div class="step-text">保存后路由器重启，全屋设备即时生效</div></li>
+            </ol>
+            <p class="step-note">💡 路由器修改一次，家中所有设备同时受益，优先推荐。</p>
+        </div>
+    </div>
+</div>
+
+<div class="card" id="mod-official">
+    <div class="card-head">
+        <div class="section-title">发布渠道</div>
+        <button class="btn-check" onclick="checkModule('mod-official')">检测状态</button>
+    </div>
+    <div class="url-grid" id="grid-official">
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+    </div>
+</div>
+
+<div class="card" id="mod-backup">
+    <div class="card-head">
+        <div class="section-title">可用网址</div>
+        <button class="btn-check" onclick="checkModule('mod-backup')">检测状态</button>
+    </div>
+    <div class="url-grid" id="grid-backup">
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+        <div class="url-skeleton"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-head">
+        <div class="section-title">服务与支持</div>
+    </div>
+    <div class="info-list">
+        <div class="info-row">
+            <span class="info-label">官方联系邮箱</span>
+            <div class="info-text" id="emailRow">加载中…</div>
+        </div>
+        <div class="info-row">
+            <span class="info-label">其它问题</span>
+            <div class="info-text alert" id="emailAlert">加载中…</div>
+        </div>
+        <div class="info-row">
+            <span class="info-label">投屏说明</span>
+            <div class="info-text">请使用我们的手机app进行投屏，或者直接在电视上安装我们的安卓tv端。</div>
+        </div>
+        <div class="info-row">
+            <span class="info-label">推荐浏览器</span>
+            <div class="info-text">
+                <div class="tags">
+                    <a href="https://www.google.cn/chrome/" target="_blank">Chrome</a>
+                    <a href="https://www.mozilla.org/zh-CN/firefox/new/" target="_blank">Firefox</a>
+                    <a href="https://www.xbrowser.com/" target="_blank">X浏览器</a>
+                    <a href="http://www.viayoo.com/zh-cn/" target="_blank">Via</a>
+                    <a href="https://www.lemurbrowser.com/app/zh/" target="_blank">狐猴</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="siteFooter"></footer>
+
+</div><!-- /wrap -->
+
+<script>
+function xorDecode(encoded, key) {
+    return encoded.split(',').map((n, i) =>
+        String.fromCharCode(parseInt(n) ^ key.charCodeAt(i % key.length))
+    ).join('');
+}
+
+const _K = 'aidi2026';
+
+const _BRAND = xorDecode('29264,36739,24341,35247', _K);
+
+const _OFFICIAL = [
+    { e: xorDecode('0,0,0,0,70,70,28,81,8,29,12,28,80,30,91,89', _K), label: 'GitHub 永久地址', github: true },
+    { e: xorDecode('0,0,0,0,3,2,1,24,2,6,9', _K),  label: '发布页 A' },
+    { e: xorDecode('0,13,29,26,28,83,81', _K),             label: '永久发布页（推荐）' },
+];
+
+const _BACKUP = [
+    { e: xorDecode('0,0,0,0,28,92,83', _K),               label: '备用线路 01' }, 
+    { e: xorDecode('0,0,0,0,28,64,64,89', _K),    label: '备用线路 02' }, 
+    { e: xorDecode('0,0,0,0,3,30,81,89,12', _K),     label: '备用线路 03' }, 
+    { e: xorDecode('0,0,0,0,0,30,81,89,12', _K),     label: '备用线路 04' }, 
+];
+
+const _EMAIL   = xorDecode('18,28,20,25,93,66,70,118,0,0,0,0,28,92,83', _K);
+
+function makeItem(url, label, isGithub) {
+    const host = url.replace(/^https?:\/\/(www\.)?/, '');
+    if (isGithub) {
+        return `<div class="url-item github-item">
+            <div class="url-info" style="flex:1;min-width:0;">
+                <span class="url-host" style="color:var(--gold);">${host}</span>
+                <span class="url-label" style="display:flex;align-items:center;gap:6px;margin-top:4px;">
+                    <span class="gh-badge">⭐ 永久可用 · GitHub 托管</span>
+                </span>
+                <span style="font-size:11px;color:var(--text-dim);margin-top:6px;display:block;line-height:1.5;">
+                    由 GitHub 全球 CDN 托管，强烈建议收藏
+                </span>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+                <div class="dot" data-url="${url}"></div>
+                <button class="btn-bookmark" onclick="bookmarkPage('${url}','${host}')">📌 收藏</button>
+                <a href="${url}" target="_blank" rel="noopener" class="btn-visit">打开 →</a>
+            </div>
+        </div>`;
+    }
+    return `<a href="${url}" class="url-item detect-link" target="_blank" rel="noopener">
+        <div class="url-info"><span class="url-host">${host}</span><span class="url-label">${label}</span></div>
+        <div class="dot"></div>
+    </a>`;
+}
+
+function renderGrid(gridId, items) {
+    const grid = document.getElementById(gridId);
+    grid.innerHTML = items.map(d => {
+        const url = d.e.includes('://') ? d.e : 'https://' + d.e;
+        return makeItem(url, d.label, d.github);
+    }).join('');
+}
+
+function renderContact() {
+    const email = _EMAIL;
+    const eLink = `<a href="mailto:${email}" class="link">${email}</a>&ensp;获取最新网址 / 资源反馈`;
+    document.getElementById('emailRow').innerHTML  = eLink;
+    document.getElementById('emailAlert').innerHTML = `请发送邮件至 <a href="mailto:${email}" class="link">${email}</a> 进行咨询`;
+
+
+}
+
+function renderBrand() {
+    document.getElementById('siteLogo').textContent = _BRAND;
+    document.getElementById('siteFooter').textContent =
+        `© 2019–${new Date().getFullYear()} ${_BRAND} · All Rights Reserved`;
+}
+
+function copyDns(val, el) {
+    navigator.clipboard.writeText(val).then(() => {
+        const hint = el.querySelector('.copy-hint');
+        hint.textContent = '已复制！';
+        hint.style.color = 'var(--ok)';
+        setTimeout(() => { hint.textContent = '点击复制'; hint.style.color = ''; }, 2000);
+    });
+}
+
+function toggleGuide() {
+    const toggle = document.getElementById('guideToggle');
+    const panels = document.getElementById('platformPanels');
+    const open   = toggle.classList.toggle('open');
+    panels.style.display = open ? 'block' : 'none';
+    const label = toggle.lastChild;
+    if (label && label.nodeType === 3) label.textContent = open ? ' 收起教程' : ' 查看各设备修改教程';
+}
+
+function switchTab(id, el) {
+    document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+}
+
+function bookmarkPage(url, title) {
+    // 现代浏览器已禁止脚本直接添加书签，引导用户手动操作
+    const isMac = navigator.platform.toUpperCase().includes('MAC');
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isAndroid = /android/i.test(navigator.userAgent);
+
+    let msg = '';
+    if (isIOS)          msg = '点击底部分享按钮 → 选择"添加到主屏幕"，即可永久保存！';
+    else if (isAndroid) msg = '点击浏览器菜单（右上角 ⋮）→ 选择"添加到书签"或"添加到主屏幕"！';
+    else if (isMac)     msg = '按 ⌘+D 即可收藏此页面到书签！';
+    else                msg = '按 Ctrl+D 即可收藏此页面到书签！';
+
+    showToast(msg, 5000);
+}
+
+let _toastTimer;
+function showToast(msg, duration = 3000) {
+    let toast = document.getElementById('_toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = '_toast';
+        toast.style.cssText = `position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);
+            background:#1a1a1e;color:#fff;font-size:13px;line-height:1.6;padding:14px 20px;border-radius:12px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.25);max-width:320px;text-align:center;
+            border:1px solid rgba(201,152,10,0.3);opacity:0;transition:opacity .25s,transform .25s;z-index:9999;`;
+        document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    clearTimeout(_toastTimer);
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    _toastTimer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, duration);
+}
+
+async function checkUrl(url, dot) {
+    dot.className = 'dot checking';
+    const ctrl = new AbortController();
+    const tid  = setTimeout(() => ctrl.abort(), 6000);
+    try   { await fetch(url, { mode: 'no-cors', signal: ctrl.signal }); dot.className = 'dot ok';   }
+    catch { dot.className = 'dot fail'; }
+    finally { clearTimeout(tid); }
+}
+
+function checkModule(id) {
+    const mod = document.getElementById(id);
+    const btn = mod.querySelector('.btn-check');
+    btn.disabled = true; btn.textContent = '检测中…';
+    const links = Array.from(mod.querySelectorAll('.detect-link'));
+    Promise.all(links.map(a => checkUrl(a.href, a.querySelector('.dot')))).then(() => {
+        btn.disabled = false; btn.textContent = '重新检测';
+    });
+}
+
+(function init() {
+    renderBrand();
+    renderGrid('grid-official', _OFFICIAL);
+    renderGrid('grid-backup',   _BACKUP);
+    renderContact();
+})();
+</script>
+</body>
+</html>
